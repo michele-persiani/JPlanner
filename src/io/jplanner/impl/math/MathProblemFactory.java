@@ -77,7 +77,7 @@ public class MathProblemFactory
             @Override
             public void accept(MathState mathState)
             {
-                mathState.x *= value;
+                mathState.x = (int)(mathState.x * value);
             }
 
             public String toString()

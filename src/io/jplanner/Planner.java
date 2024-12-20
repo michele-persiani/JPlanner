@@ -18,7 +18,6 @@ public class Planner<S extends IState>
     {
         this.priorityStrategy = priorityStrategy;
         this.haltStrategy = haltStrategy;
-
     }
 
     public Planner(IPriorityStrategy<S> costStrategy)
@@ -72,7 +71,7 @@ public class Planner<S extends IState>
 
             long elapsedTime = System.currentTimeMillis() - startTime;
 
-            Collection<PlanNode<S>> newNodes = domain.operators
+            domain.operators
                     .stream()
                     .filter(op -> op.canApply(node.state))
                     .map(op -> {
@@ -88,9 +87,8 @@ public class Planner<S extends IState>
                         newNode.priority = priorityStrategy.apply(newNode);
                         return newNode;
                     })
-                    .toList();
+                    .forEach(nodeQueue::add);
 
-            nodeQueue.addAll(newNodes);
         }
         throw new NoPlanFoundException();
     }

@@ -4,7 +4,7 @@ import io.jplanner.IState;
 
 public class MathState implements IState
 {
-    public double x;
+    public int x;
 
     @Override
     public IState clone()
